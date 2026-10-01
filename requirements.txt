@@ -1,5 +1,6 @@
 numpy>=1.26
 scipy>=1.11
+quadprog>=0.1.12
 pandas>=2.1
 pyarrow>=14
 yfinance>=0.2.40

@@ -37,6 +37,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 
 import numpy as np
+import quadprog
 from numpy.typing import ArrayLike
 from scipy.optimize import lsq_linear, minimize
 
@@ -212,18 +213,17 @@ class _Problem:
         return x, sse, cal_violation
 
     def _qp(self, A, sw, C, d, lo, hi, x0) -> Array:
+        """Convex QP (Goldfarb-Idnani): min |W^1/2 (A x - w)|^2 s.t. C x >= d, box."""
         Aw, bw = A * sw[:, None], self.w * sw
-        H, f = Aw.T @ Aw, Aw.T @ bw
-        r = minimize(
-            lambda x: 0.5 * x @ H @ x - f @ x,
-            np.clip(x0, lo, hi),
-            jac=lambda x: H @ x - f,
-            method="SLSQP",
-            bounds=list(zip(lo, hi, strict=True)),
-            constraints=[{"type": "ineq", "fun": lambda x: C @ x - d, "jac": lambda x: C}],
-            options={"maxiter": 200, "ftol": 1e-15},
-        )
-        return r.x
+        H = Aw.T @ Aw
+        H += 1e-12 * np.trace(H) * np.eye(3)  # strictly positive definite
+        eye = np.eye(3)
+        C_all = np.vstack([C, eye, -eye])
+        d_all = np.concatenate([d, lo, -hi])
+        try:
+            return quadprog.solve_qp(H, Aw.T @ bw, C_all.T, d_all, 0)[0]
+        except ValueError:  # inconsistent constraints: keep the box-only solution
+            return x0
 
     def params(self, x: Array, m: float, sigma: float) -> SVIParams:
         a, u, v = x * self.theta
