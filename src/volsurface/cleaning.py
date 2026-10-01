@@ -15,9 +15,11 @@ Pipeline for one underlying on one day:
 5. Keep only out-of-the-money options relative to ``F`` (puts below, calls at
    or above), which removes deep in-the-money quotes. Compute mid, bid and ask
    implied vols.
-6. Flag remaining stale quotes as implied-vol outliers versus their strike
-   neighbours. Yahoo provides no quote timestamps, so staleness can only be
-   detected from cross-sectional inconsistency.
+6. Flag remaining stale quotes from cross-sectional inconsistency (Yahoo
+   provides no quote timestamps): implied-vol outliers versus their strike
+   neighbours, then quotes that form an executable static arbitrage with their
+   neighbours (a live market cannot offer a riskless credit). From each
+   arbitrage the quote with the oldest last trade is removed, until none remain.
 """
 
 from __future__ import annotations
@@ -31,6 +33,7 @@ from zoneinfo import ZoneInfo
 import numpy as np
 import pandas as pd
 
+from volsurface.arbitrage import executable_violations
 from volsurface.iv import implied_total_vol
 from volsurface.rates import RateCurve
 
@@ -219,6 +222,35 @@ def infer_forward(
     return fit, pairs.index[~keep]
 
 
+CONSISTENCY_REASONS = {"parity_outlier", "stale_outlier", "stale_arbitrage"}
+
+
+def _arbitrage_stale(g: pd.DataFrame, max_iter: int = 500) -> pd.Index:
+    """Indices of quotes to drop so that no executable arbitrage remains."""
+    if len(g) < 2:
+        return pd.Index([])
+    D, F = g["D"].iloc[0], g["F"].iloc[0]
+    g = g.sort_values("strike")
+    parity = np.where(g["type"].to_numpy() == "P", D * (F - g["strike"].to_numpy()), 0.0)
+    x = g["strike"].to_numpy() / F
+    bid = (g["bid"].to_numpy() + parity) / (D * F)
+    ask = (g["ask"].to_numpy() + parity) / (D * F)
+    last = pd.to_datetime(g["lastTradeDate"], utc=True).to_numpy()
+    alive = np.ones(len(g), dtype=bool)
+    for _ in range(max_iter):
+        idx = np.where(alive)[0]
+        viol = executable_violations(x[idx], bid[idx], ask[idx])
+        if not viol:
+            break
+        # Count involvement; among the most-involved quotes drop the stalest.
+        counts = np.zeros(len(idx), dtype=int)
+        for v in viol:
+            counts[list(v)] += 1
+        cand = np.where(counts == counts.max())[0]
+        alive[idx[cand[np.argmin(last[idx[cand]])]]] = False
+    return g.index[~alive]
+
+
 def _flag_iv_outliers(g: pd.DataFrame, cfg: CleanConfig) -> pd.Series:
     """True for quotes whose IV is far from the rolling median of neighbours."""
     g = g.sort_values("k")
@@ -297,6 +329,7 @@ def clean_chain(
         if live.sum() >= 3:
             outl = _flag_iv_outliers(g[live], cfg)
             g.loc[outl[outl].index, "drop_reason"] = "stale_outlier"
+        g.loc[_arbitrage_stale(g[g["drop_reason"] == ""]), "drop_reason"] = "stale_arbitrage"
         if (g["drop_reason"] == "").sum() < cfg.min_quotes_per_expiry:
             g.loc[g["drop_reason"] == "", "drop_reason"] = "too_few_quotes"
         out.append(g)
@@ -304,6 +337,9 @@ def clean_chain(
     quotes = pd.concat(out, ignore_index=True)
     quotes["w"] = quotes["iv"] ** 2 * quotes["T"]
     quotes["used"] = quotes["drop_reason"] == ""
+    # The market as quoted: OTM quotes passing quote-level filters, before any
+    # consistency-based stale removal. Used to report raw-market arbitrage.
+    quotes["quoted"] = quotes["drop_reason"].isin(CONSISTENCY_REASONS | {""})
     forwards = pd.DataFrame([f.__dict__ for f in fwd_rows])
     if not forwards.empty:
         forwards["spot"] = spot
