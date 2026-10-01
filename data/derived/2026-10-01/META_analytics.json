@@ -1,5 +1,5 @@
 {
- "pipeline_version": "1",
+ "pipeline_version": "2",
  "analytics": {
   "name": "META",
   "trade_date": "2026-10-01",
@@ -40,11 +40,11 @@
   "earnings": {
    "n_pre": 5,
    "n_post": 5,
-   "base_vol": 0.3647156336462341,
-   "jump_sd": 0.0727977017478316,
-   "expected_abs_move": 0.058084162286526596,
-   "two_expiry_jump_sd": 0.07371194000798474,
-   "straddle_move": 0.1005767446621072,
+   "base_vol": 0.3661051753074279,
+   "jump_sd": 0.07292081954638753,
+   "expected_abs_move": 0.05818239607715442,
+   "two_expiry_jump_sd": 0.07366972114578642,
+   "straddle_move": 0.10108857778041502,
    "method_note": "NNLS on ATM total variance vs business-day time",
    "earnings_date": "2026-10-28"
   }

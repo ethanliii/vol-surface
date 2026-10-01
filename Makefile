@@ -7,7 +7,7 @@ test:
 	.venv/bin/pytest
 
 lint:
-	.venv/bin/ruff check src tests scripts && .venv/bin/ruff format --check src tests scripts
+	.venv/bin/ruff check src tests && .venv/bin/ruff format --check src tests
 
 collect:
 	.venv/bin/volsurface collect

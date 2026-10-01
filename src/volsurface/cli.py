@@ -24,6 +24,12 @@ def main(argv: list[str] | None = None) -> None:
     p_proc.add_argument("--derived", type=Path, default=DERIVED_DIR)
     p_proc.add_argument("--force", action="store_true", help="ignore cached results")
 
+    p_build = sub.add_parser("build", help="process snapshots, then build figures and site")
+    p_build.add_argument("--data", type=Path, default=DATA_DIR)
+    p_build.add_argument("--derived", type=Path, default=DERIVED_DIR)
+    p_build.add_argument("--docs", type=Path, default=Path("docs"))
+    p_build.add_argument("--force", action="store_true", help="ignore cached results")
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
@@ -32,6 +38,12 @@ def main(argv: list[str] | None = None) -> None:
         print(snap if snap else "skipped")
     elif args.cmd == "process":
         process_all(args.data, args.derived, args.force)
+    elif args.cmd == "build":
+        from volsurface.report import build_report, markdown_tables
+
+        process_all(args.data, args.derived, args.force)
+        tables = build_report(args.derived, args.docs)
+        print(markdown_tables(tables))
 
 
 if __name__ == "__main__":

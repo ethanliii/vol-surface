@@ -1,0 +1,419 @@
+{
+ "headline": {
+  "date": "2026-10-01",
+  "n_snapshots": 1,
+  "atm_30d": 0.13337377741672585,
+  "model_free_30d": 0.16171736906189058,
+  "vix": 16.389999389648438
+ },
+ "fit": [
+  {
+   "underlying": "SPX",
+   "expiries": 48,
+   "quotes": 8810,
+   "rmse_raw_svi_volpts": 0.19727339860701695,
+   "rmse_arbfree_svi_volpts": 0.30274147697321596,
+   "rmse_ssvi_volpts": 2.2783977739562076,
+   "atm_30d": 0.13337377741672585,
+   "rr25_30d": -0.03727429655209456
+  },
+  {
+   "underlying": "JPM",
+   "expiries": 10,
+   "quotes": 246,
+   "rmse_raw_svi_volpts": 0.21490649897569516,
+   "rmse_arbfree_svi_volpts": 0.2271598511967197,
+   "rmse_ssvi_volpts": 0.3476401614442584,
+   "atm_30d": 0.26378227885919603,
+   "rr25_30d": -0.02343218085241966
+  },
+  {
+   "underlying": "META",
+   "expiries": 14,
+   "quotes": 1228,
+   "rmse_raw_svi_volpts": 0.14761141098943256,
+   "rmse_arbfree_svi_volpts": 0.15985223267769047,
+   "rmse_ssvi_volpts": 0.7300944592816873,
+   "atm_30d": 0.44682596871800284,
+   "rr25_30d": 0.0024452212539025076
+  },
+  {
+   "underlying": "NFLX",
+   "expiries": 11,
+   "quotes": 385,
+   "rmse_raw_svi_volpts": 0.5300604002658191,
+   "rmse_arbfree_svi_volpts": 0.5445446051369646,
+   "rmse_ssvi_volpts": 1.6746505843707287,
+   "atm_30d": 0.4489639170998804,
+   "rr25_30d": 0.0020175680716644218
+  },
+  {
+   "underlying": "TSLA",
+   "expiries": 15,
+   "quotes": 1328,
+   "rmse_raw_svi_volpts": 0.7721846008368312,
+   "rmse_arbfree_svi_volpts": 0.7805462330824142,
+   "rmse_ssvi_volpts": 5.239380269295035,
+   "atm_30d": 0.4422567146304766,
+   "rr25_30d": 0.002926901588046038
+  }
+ ],
+ "arbitrage": [
+  {
+   "underlying": "SPX",
+   "object": "market quotes (mid)",
+   "butterfly_violations": 2448,
+   "butterfly_tests": 17654,
+   "calendar_violations": 62,
+   "calendar_tests": 8542,
+   "slices_with_butterfly": 48,
+   "slice_pairs_with_calendar": 8
+  },
+  {
+   "underlying": "SPX",
+   "object": "market quotes (executable bid/ask)",
+   "butterfly_violations": 388,
+   "butterfly_tests": 17654,
+   "calendar_violations": 57,
+   "calendar_tests": 8542,
+   "slices_with_butterfly": 14,
+   "slice_pairs_with_calendar": 6
+  },
+  {
+   "underlying": "SPX",
+   "object": "raw SVI (per slice)",
+   "butterfly_violations": 2180,
+   "butterfly_tests": 14448,
+   "calendar_violations": 3843,
+   "calendar_tests": 14147,
+   "slices_with_butterfly": 47,
+   "slice_pairs_with_calendar": 29
+  },
+  {
+   "underlying": "SPX",
+   "object": "arbitrage-free SVI",
+   "butterfly_violations": 0,
+   "butterfly_tests": 14448,
+   "calendar_violations": 0,
+   "calendar_tests": 14147,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "SPX",
+   "object": "SSVI (global)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 14448,
+   "calendar_violations": 0,
+   "calendar_tests": 14147,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "JPM",
+   "object": "market quotes (mid)",
+   "butterfly_violations": 39,
+   "butterfly_tests": 476,
+   "calendar_violations": 1,
+   "calendar_tests": 198,
+   "slices_with_butterfly": 6,
+   "slice_pairs_with_calendar": 1
+  },
+  {
+   "underlying": "JPM",
+   "object": "market quotes (executable bid/ask)",
+   "butterfly_violations": 4,
+   "butterfly_tests": 476,
+   "calendar_violations": 0,
+   "calendar_tests": 198,
+   "slices_with_butterfly": 1,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "JPM",
+   "object": "raw SVI (per slice)",
+   "butterfly_violations": 466,
+   "butterfly_tests": 3010,
+   "calendar_violations": 809,
+   "calendar_tests": 2709,
+   "slices_with_butterfly": 4,
+   "slice_pairs_with_calendar": 6
+  },
+  {
+   "underlying": "JPM",
+   "object": "arbitrage-free SVI",
+   "butterfly_violations": 0,
+   "butterfly_tests": 3010,
+   "calendar_violations": 0,
+   "calendar_tests": 2709,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "JPM",
+   "object": "SSVI (global)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 3010,
+   "calendar_violations": 0,
+   "calendar_tests": 2709,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "META",
+   "object": "market quotes (mid)",
+   "butterfly_violations": 220,
+   "butterfly_tests": 2370,
+   "calendar_violations": 4,
+   "calendar_tests": 1057,
+   "slices_with_butterfly": 13,
+   "slice_pairs_with_calendar": 2
+  },
+  {
+   "underlying": "META",
+   "object": "market quotes (executable bid/ask)",
+   "butterfly_violations": 16,
+   "butterfly_tests": 2370,
+   "calendar_violations": 4,
+   "calendar_tests": 1057,
+   "slices_with_butterfly": 4,
+   "slice_pairs_with_calendar": 2
+  },
+  {
+   "underlying": "META",
+   "object": "raw SVI (per slice)",
+   "butterfly_violations": 287,
+   "butterfly_tests": 4214,
+   "calendar_violations": 869,
+   "calendar_tests": 3913,
+   "slices_with_butterfly": 7,
+   "slice_pairs_with_calendar": 6
+  },
+  {
+   "underlying": "META",
+   "object": "arbitrage-free SVI",
+   "butterfly_violations": 0,
+   "butterfly_tests": 4214,
+   "calendar_violations": 0,
+   "calendar_tests": 3913,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "META",
+   "object": "SSVI (global)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 4214,
+   "calendar_violations": 0,
+   "calendar_tests": 3913,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "NFLX",
+   "object": "market quotes (mid)",
+   "butterfly_violations": 98,
+   "butterfly_tests": 755,
+   "calendar_violations": 0,
+   "calendar_tests": 333,
+   "slices_with_butterfly": 8,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "NFLX",
+   "object": "market quotes (executable bid/ask)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 755,
+   "calendar_violations": 0,
+   "calendar_tests": 333,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "NFLX",
+   "object": "raw SVI (per slice)",
+   "butterfly_violations": 157,
+   "butterfly_tests": 3311,
+   "calendar_violations": 866,
+   "calendar_tests": 3010,
+   "slices_with_butterfly": 3,
+   "slice_pairs_with_calendar": 6
+  },
+  {
+   "underlying": "NFLX",
+   "object": "arbitrage-free SVI",
+   "butterfly_violations": 0,
+   "butterfly_tests": 3311,
+   "calendar_violations": 0,
+   "calendar_tests": 3010,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "NFLX",
+   "object": "SSVI (global)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 3311,
+   "calendar_violations": 0,
+   "calendar_tests": 3010,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "TSLA",
+   "object": "market quotes (mid)",
+   "butterfly_violations": 227,
+   "butterfly_tests": 2547,
+   "calendar_violations": 1,
+   "calendar_tests": 1068,
+   "slices_with_butterfly": 14,
+   "slice_pairs_with_calendar": 1
+  },
+  {
+   "underlying": "TSLA",
+   "object": "market quotes (executable bid/ask)",
+   "butterfly_violations": 4,
+   "butterfly_tests": 2547,
+   "calendar_violations": 0,
+   "calendar_tests": 1068,
+   "slices_with_butterfly": 1,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "TSLA",
+   "object": "raw SVI (per slice)",
+   "butterfly_violations": 348,
+   "butterfly_tests": 4515,
+   "calendar_violations": 1100,
+   "calendar_tests": 4214,
+   "slices_with_butterfly": 8,
+   "slice_pairs_with_calendar": 9
+  },
+  {
+   "underlying": "TSLA",
+   "object": "arbitrage-free SVI",
+   "butterfly_violations": 0,
+   "butterfly_tests": 4515,
+   "calendar_violations": 0,
+   "calendar_tests": 4214,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  },
+  {
+   "underlying": "TSLA",
+   "object": "SSVI (global)",
+   "butterfly_violations": 0,
+   "butterfly_tests": 4515,
+   "calendar_violations": 0,
+   "calendar_tests": 4214,
+   "slices_with_butterfly": 0,
+   "slice_pairs_with_calendar": 0
+  }
+ ],
+ "earnings": [
+  {
+   "underlying": "JPM",
+   "earnings_date": "2026-10-13",
+   "jump_sd": 0.02892999366781231,
+   "expected_abs_move": 0.023082795291672103,
+   "two_expiry_jump_sd": 0.03966678923721239,
+   "straddle_move": 0.04861848066278329,
+   "base_vol": 0.24309237610722717,
+   "n_pre": 1,
+   "n_post": 6
+  },
+  {
+   "underlying": "META",
+   "earnings_date": "2026-10-28",
+   "jump_sd": 0.07292081954638753,
+   "expected_abs_move": 0.05818239607715442,
+   "two_expiry_jump_sd": 0.07366972114578642,
+   "straddle_move": 0.10108857778041502,
+   "base_vol": 0.3661051753074279,
+   "n_pre": 5,
+   "n_post": 5
+  },
+  {
+   "underlying": "NFLX",
+   "earnings_date": "2026-10-20",
+   "jump_sd": 0.08022192249909409,
+   "expected_abs_move": 0.0640078333999512,
+   "two_expiry_jump_sd": 0.09280163872501711,
+   "straddle_move": 0.09517492278977446,
+   "base_vol": 0.3434226965755851,
+   "n_pre": 2,
+   "n_post": 6
+  },
+  {
+   "underlying": "TSLA",
+   "earnings_date": "2026-10-21",
+   "jump_sd": 0.052991438705679024,
+   "expected_abs_move": 0.04228105079799267,
+   "two_expiry_jump_sd": 0.06009512085680356,
+   "straddle_move": 0.0925186750390723,
+   "base_vol": 0.40348467184691633,
+   "n_pre": 4,
+   "n_post": 6
+  }
+ ],
+ "cleaning": [
+  {
+   "underlying": "SPX",
+   "raw_quotes": 16052,
+   "used": 8810,
+   "in_the_money": 5349,
+   "zero_bid": 749,
+   "wide_market": 492,
+   "stale_last_trade": 441,
+   "stale_arbitrage": 134,
+   "parity_outlier": 36,
+   "stale_outlier": 28,
+   "crossed_or_locked": 13
+  },
+  {
+   "underlying": "JPM",
+   "raw_quotes": 1055,
+   "in_the_money": 395,
+   "zero_bid": 258,
+   "used": 246,
+   "wide_market": 96,
+   "stale_last_trade": 21,
+   "no_forward": 18,
+   "parity_outlier": 14,
+   "too_few_quotes": 7
+  },
+  {
+   "underlying": "META",
+   "raw_quotes": 3535,
+   "in_the_money": 1296,
+   "used": 1228,
+   "zero_bid": 512,
+   "wide_market": 362,
+   "stale_last_trade": 113,
+   "parity_outlier": 18,
+   "stale_outlier": 6
+  },
+  {
+   "underlying": "NFLX",
+   "raw_quotes": 2679,
+   "stale_last_trade": 914,
+   "zero_bid": 596,
+   "in_the_money": 552,
+   "used": 385,
+   "wide_market": 217,
+   "stale_outlier": 11,
+   "too_few_quotes": 4
+  },
+  {
+   "underlying": "TSLA",
+   "raw_quotes": 2945,
+   "used": 1328,
+   "in_the_money": 1076,
+   "zero_bid": 272,
+   "wide_market": 160,
+   "stale_last_trade": 88,
+   "stale_outlier": 13,
+   "parity_outlier": 8
+  }
+ ]
+}

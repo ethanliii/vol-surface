@@ -1,5 +1,5 @@
 {
- "pipeline_version": "1",
+ "pipeline_version": "2",
  "analytics": {
   "name": "TSLA",
   "trade_date": "2026-10-01",
@@ -40,11 +40,11 @@
   "earnings": {
    "n_pre": 4,
    "n_post": 6,
-   "base_vol": 0.3936073540410935,
-   "jump_sd": 0.052271440211133634,
-   "expected_abs_move": 0.0417065751153936,
-   "two_expiry_jump_sd": 0.0580381635217404,
-   "straddle_move": 0.08964220398144818,
+   "base_vol": 0.40348467184691633,
+   "jump_sd": 0.052991438705679024,
+   "expected_abs_move": 0.04228105079799267,
+   "two_expiry_jump_sd": 0.06009512085680356,
+   "straddle_move": 0.0925186750390723,
    "method_note": "NNLS on ATM total variance vs business-day time",
    "earnings_date": "2026-10-21"
   }

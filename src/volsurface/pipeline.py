@@ -37,11 +37,11 @@ from volsurface.cleaning import (
 )
 from volsurface.ssvi import SSVISurface, fit_ssvi
 from volsurface.surface import SVISurface, build_slices, fit_svi_surface
-from volsurface.svi import SVIParams, svi_total_variance
+from volsurface.svi import SVIParams
 
 log = logging.getLogger(__name__)
 
-PIPELINE_VERSION = "1"
+PIPELINE_VERSION = "2"
 DERIVED_DIR = Path("data/derived")
 INDEXES = {"SPX"}
 
@@ -107,8 +107,10 @@ def process_underlying(snap: Snapshot, name: str) -> Result:
     dates = info.get("earnings_dates") or []
     if dates:
         e_date = date.fromisoformat(dates[0])
-        # Raw per-slice SVI ATM total variance: not coupled across expiries.
-        atm_w = np.array([float(svi_total_variance(s.raw, 0.0)) for s in sl])
+        # Market ATM total variance (mid IVs interpolated at k = 0): model-free,
+        # so an SVI misfit at the money (e.g. TSLA's sharp ATM curvature) does
+        # not leak into the jump estimate.
+        atm_w = np.array([s.theta_market for s in sl])
         mv = earnings_move(snap.trade_date, e_date, [s.expiry for s in sl], atm_w)
         analytics["earnings"] = (
             None

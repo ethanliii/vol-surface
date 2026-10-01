@@ -1,5 +1,5 @@
 {
- "pipeline_version": "1",
+ "pipeline_version": "2",
  "analytics": {
   "name": "NFLX",
   "trade_date": "2026-10-01",
@@ -39,11 +39,11 @@
   "earnings": {
    "n_pre": 2,
    "n_post": 6,
-   "base_vol": 0.3441345060207446,
-   "jump_sd": 0.079853839813522,
-   "expected_abs_move": 0.06371414590803437,
-   "two_expiry_jump_sd": 0.09251171062351467,
-   "straddle_move": 0.09489596395447952,
+   "base_vol": 0.3434226965755851,
+   "jump_sd": 0.08022192249909409,
+   "expected_abs_move": 0.0640078333999512,
+   "two_expiry_jump_sd": 0.09280163872501711,
+   "straddle_move": 0.09517492278977446,
    "method_note": "NNLS on ATM total variance vs business-day time",
    "earnings_date": "2026-10-20"
   }

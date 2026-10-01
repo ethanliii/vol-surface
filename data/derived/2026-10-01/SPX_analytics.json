@@ -1,5 +1,5 @@
 {
- "pipeline_version": "1",
+ "pipeline_version": "2",
  "analytics": {
   "name": "SPX",
   "trade_date": "2026-10-01",

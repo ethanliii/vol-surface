@@ -1,5 +1,5 @@
 {
- "pipeline_version": "1",
+ "pipeline_version": "2",
  "analytics": {
   "name": "JPM",
   "trade_date": "2026-10-01",
@@ -39,11 +39,11 @@
   "earnings": {
    "n_pre": 1,
    "n_post": 6,
-   "base_vol": 0.24223917998346425,
-   "jump_sd": 0.028160763920139057,
-   "expected_abs_move": 0.02246903875229333,
-   "two_expiry_jump_sd": 0.03914506424296438,
-   "straddle_move": 0.04818984053257813,
+   "base_vol": 0.24309237610722717,
+   "jump_sd": 0.02892999366781231,
+   "expected_abs_move": 0.023082795291672103,
+   "two_expiry_jump_sd": 0.03966678923721239,
+   "straddle_move": 0.04861848066278329,
    "method_note": "NNLS on ATM total variance vs business-day time",
    "earnings_date": "2026-10-13"
   }
