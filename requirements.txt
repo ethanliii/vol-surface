@@ -6,6 +6,7 @@ pyarrow>=14
 yfinance>=0.2.40
 requests>=2.31
 plotly>=5.18
+kaleido>=1.0
 matplotlib>=3.8
 pytest>=8
 ruff>=0.5

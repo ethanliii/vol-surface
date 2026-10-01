@@ -65,7 +65,10 @@ def build_report(derived_root: Path = DERIVED_DIR, docs: Path = DOCS) -> dict:
     plots.earnings_chart(stocks, analytics, trade_date, img / "earnings.png")
 
     surf_figs = {n: plots.surface_figure(surfaces[n], quotes[n], n, date_str) for n in names}
-    surf_figs[main].write_image(img / f"surface_{main}.png", width=1100, height=700, scale=1.5)
+    try:  # static export needs kaleido + a Chrome binary; the site does not
+        surf_figs[main].write_image(img / f"surface_{main}.png", width=1100, height=700, scale=1.5)
+    except Exception as exc:
+        log.warning("could not export surface PNG: %s", exc)
     smile_figs = {n: plots.smile_explorer(surfaces[n], ssvis[n], n) for n in names}
 
     tables = results_tables(names, analytics, arbs, cleaning, hist)

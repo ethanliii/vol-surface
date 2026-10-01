@@ -16,6 +16,7 @@ dependencies = [
     "yfinance>=0.2.40",
     "requests>=2.31",
     "plotly>=5.18",
+    "kaleido>=1.0",
     "matplotlib>=3.8",
 ]
 
