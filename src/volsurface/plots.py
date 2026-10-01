@@ -379,10 +379,10 @@ def arbitrage_chart(surf: SVISurface, name: str, date_str: str, path: Path) -> N
 
 def surface_figure(surf: SVISurface, quotes: pd.DataFrame, name: str, date_str: str) -> go.Figure:
     """3D implied-vol surface over (moneyness K/F, days) with market mids."""
-    T_grid = np.geomspace(surf.T[0], surf.T[-1], 220)
+    T_grid = np.geomspace(surf.T[0], surf.T[-1], 120)
     lo = max(-0.6, min(s.k.min() for s in surf.slices))
     hi = min(0.3, max(s.k.max() for s in surf.slices))
-    k = np.linspace(lo, hi, 240)
+    k = np.linspace(lo, hi, 150)
     Z = np.array([surf.implied_vol(k, T) for T in T_grid])
     # Draw the surface over a smooth region in standardized moneyness
     # z = k / sqrt(w_atm(T)), from 4 ATM standard deviations below the forward
@@ -440,6 +440,16 @@ def surface_figure(surf: SVISurface, quotes: pd.DataFrame, name: str, date_str: 
         paper_bgcolor=SURFACE,
         font={"family": "system-ui, -apple-system, Segoe UI, sans-serif", "color": INK},
     )
+    return _f32(fig)
+
+
+def _f32(fig: go.Figure) -> go.Figure:
+    """Store trace arrays as float32 to halve the embedded JSON size."""
+    for t in fig.data:
+        for attr in ("x", "y", "z"):
+            v = getattr(t, attr, None)
+            if v is not None and hasattr(v, "dtype") and v.dtype.kind == "f":
+                setattr(t, attr, np.asarray(v, dtype=np.float32))
     return fig
 
 
@@ -450,7 +460,7 @@ def smile_explorer(surf: SVISurface, ssvi, name: str) -> go.Figure:
     for i, s in enumerate(surf.slices):
         vis = i == 0
         pad = 0.08 * (s.k.max() - s.k.min())
-        kk = np.linspace(s.k.min() - pad, s.k.max() + pad, 200)
+        kk = np.linspace(s.k.min() - pad, s.k.max() + pad, 120)
         T = s.T
         fig.add_trace(
             go.Scatter(
@@ -528,4 +538,4 @@ def smile_explorer(surf: SVISurface, ssvi, name: str) -> go.Figure:
         yaxis={"gridcolor": GRID},
         legend={"orientation": "h", "y": -0.18},
     )
-    return fig
+    return _f32(fig)

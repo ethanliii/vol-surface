@@ -2,9 +2,9 @@ name: collect-snapshot
 
 # One option-chain snapshot per trading day, after the 16:15 ET options close.
 # 22:15 UTC is 18:15 EDT / 17:15 EST. Holidays are skipped inside the job
-# (no snapshot is written if ^SPX has no bar for today). After collecting,
-# the new snapshot is processed (cached results for earlier days are reused)
-# and the site in docs/ is rebuilt.
+# (no snapshot is written if ^SPX has no bar for today). The new snapshot is
+# processed (results for earlier days are cached in data/derived), committed,
+# and the site is redeployed.
 on:
   schedule:
     - cron: "15 22 * * 1-5"
@@ -12,6 +12,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: collect
@@ -30,13 +32,16 @@ jobs:
       - run: pip install -r requirements.txt && pip install -e .
       - name: Collect snapshot
         run: volsurface collect
-      - name: Process and rebuild site
-        run: volsurface build
-      - name: Commit snapshot and site
+      - name: Process new snapshots
+        run: volsurface process
+      - name: Commit snapshot and derived results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data docs
+          git add data
           if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
           git commit -m "data: snapshot $(date -u +%Y-%m-%d)"
           git push
+  site:
+    needs: collect
+    uses: ./.github/workflows/pages.yml

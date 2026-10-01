@@ -213,12 +213,26 @@ def process_all(data_dir: Path, derived_root: Path = DERIVED_DIR, force: bool = 
 # ---------------------------------------------------------------------------
 
 
-def load_surface(derived_dir: Path, name: str) -> tuple[SVISurface, pd.DataFrame]:
+def clean_quotes(snap_dir: Path, name: str) -> pd.DataFrame:
+    snap = load_snapshot(snap_dir)
+    cfg = SPX_CONFIG if name in INDEXES else STOCK_CONFIG
+    close = snap.meta["underlyings"][name]["close"]
+    quotes, _ = clean_chain(snap.chains[name], snap.trade_date, close, snap.curve, cfg)
+    return quotes[quotes["quoted"]][QUOTE_COLS]
+
+
+def load_surface(
+    derived_dir: Path, name: str, snapshots_dir: Path = Path("data/snapshots")
+) -> tuple[SVISurface, pd.DataFrame]:
     """Rebuild an SVISurface (params only) and the quote table from disk."""
     from volsurface.surface import Slice
 
     fs = pd.read_parquet(derived_dir / f"{name}_svi.parquet")
-    quotes = pd.read_parquet(derived_dir / f"{name}_quotes.parquet")
+    qfile = derived_dir / f"{name}_quotes.parquet"
+    if qfile.exists():
+        quotes = pd.read_parquet(qfile)
+    else:  # not committed to git: re-clean from the raw snapshot (fast, deterministic)
+        quotes = clean_quotes(snapshots_dir / derived_dir.name, name)
     meta = json.loads((derived_dir / f"{name}_analytics.json").read_text())
     used = quotes[quotes["used"]]
     slices = []

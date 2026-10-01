@@ -220,3 +220,5 @@ __marimo__/
 # project
 LEARNING.md
 output/
+# per-quote derived tables are regenerated from raw snapshots
+data/derived/*/*_quotes.parquet
