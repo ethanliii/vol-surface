@@ -1,0 +1,11 @@
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+pyarrow>=14
+yfinance>=0.2.40
+requests>=2.31
+plotly>=5.18
+matplotlib>=3.8
+pytest>=8
+ruff>=0.5
+mypy>=1.8
