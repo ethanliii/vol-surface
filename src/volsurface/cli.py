@@ -17,7 +17,11 @@ def main(argv: list[str] | None = None) -> None:
     p_collect = sub.add_parser("collect", help="fetch today's option-chain snapshot")
     p_collect.add_argument("--out", type=Path, default=DATA_DIR)
     p_collect.add_argument("--tickers", nargs="*", default=None)
-    p_collect.add_argument("--force", action="store_true", help="collect on non-session days")
+    p_collect.add_argument(
+        "--force",
+        action="store_true",
+        help="collect on non-session days or overwrite today's snapshot",
+    )
 
     p_proc = sub.add_parser("process", help="clean, fit and analyse every snapshot")
     p_proc.add_argument("--data", type=Path, default=DATA_DIR)

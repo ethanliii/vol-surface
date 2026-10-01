@@ -227,6 +227,7 @@ $$w(T) = \sigma_b^2\,\tau(T) + J^2\,\mathbf{1}\{T > t_E\}$$
 - **American exercise for single stocks.** Single-stock IVs are Black-76 IVs of American options using a parity forward. Using only OTM options keeps the early-exercise premium small but not zero, especially for puts on high-rate days and calls before ex-dividend dates. A proper treatment would de-Americanize prices with a binomial tree.
 - **SVI's shape is restrictive.** Raw SVI cannot bend sharply enough at the money for TSLA. Both the raw and arbitrage-free fits sit about 1 vol point below the market ATM, which is why the earnings decomposition uses market ATM variance rather than the fit.
 - **Extrapolation.** Calendar arbitrage is defined at fixed log-moneyness, which assumes proportional dividends. Wing extrapolation beyond the quoted strikes is model-dependent, and it matters for the model-free variance integral.
+- **Collector dependence on Yahoo.** The daily job depends on Yahoo answering requests from GitHub's runners. If a day is missed (throttling, outage), it is simply absent; snapshots cannot be backfilled, because Yahoo serves no historical option chains. `make collect` after the close does the same thing locally.
 - **Rate and event inputs.** Treasury par yields are used as zero rates, which costs a few basis points at option maturities. Earnings dates come from Yahoo and may be estimates; release timing (before or after the open) is not modelled.
 
 ## Next steps

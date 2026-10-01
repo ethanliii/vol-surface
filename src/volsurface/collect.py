@@ -142,6 +142,10 @@ def collect_snapshot(
         log.info("no session today (%s, last %s); skipping", now_ny.date(), trade_date)
         return None
     snap_dir = out_dir / trade_date.isoformat()
+    if (snap_dir / "meta.json").exists() and not force:
+        # Derived results are cached per date; never silently replace raw data.
+        log.info("snapshot for %s already exists; skipping", trade_date)
+        return None
     snap_dir.mkdir(parents=True, exist_ok=True)
 
     meta: dict = {
