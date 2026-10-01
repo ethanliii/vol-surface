@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 
 from volsurface.collect import DATA_DIR, collect_snapshot
+from volsurface.pipeline import DERIVED_DIR, process_all
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -18,12 +19,19 @@ def main(argv: list[str] | None = None) -> None:
     p_collect.add_argument("--tickers", nargs="*", default=None)
     p_collect.add_argument("--force", action="store_true", help="collect on non-session days")
 
+    p_proc = sub.add_parser("process", help="clean, fit and analyse every snapshot")
+    p_proc.add_argument("--data", type=Path, default=DATA_DIR)
+    p_proc.add_argument("--derived", type=Path, default=DERIVED_DIR)
+    p_proc.add_argument("--force", action="store_true", help="ignore cached results")
+
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
     if args.cmd == "collect":
         snap = collect_snapshot(args.out, args.tickers, args.force)
         print(snap if snap else "skipped")
+    elif args.cmd == "process":
+        process_all(args.data, args.derived, args.force)
 
 
 if __name__ == "__main__":
