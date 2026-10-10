@@ -19,7 +19,7 @@ This project builds the whole chain from scratch: cleaning, forwards from put-ca
 
 ## Results (2026-10-01 close)
 
-> The project holds one daily snapshot so far. A GitHub Actions job adds one after every close and redeploys the site, and the time-series charts fill in as history builds up.
+> The tables below are from the first snapshot. A GitHub Actions job has added one snapshot after every close since 2026-10-01 and redeploys the site, so the [live site](https://hacks1234646.github.io/vol-surface/) shows the latest close and the time-series charts fill in as history builds up.
 
 ### 1. A clean SPX surface
 
@@ -118,7 +118,7 @@ The CLI is `volsurface {collect,process,build}`.
 ## Limitations
 
 - **Data.** Yahoo quotes are free, delayed and have no timestamps, so stale quotes can only be caught by inconsistency with their neighbours. A professional feed such as Cboe DataShop or OptionMetrics would make most of the cleaning unnecessary. Yahoo also serves no historical chains, so a missed day cannot be backfilled.
-- **History.** One snapshot so far. Anything about how skew or the VIX gap behaves over time needs the history the daily job is collecting.
+- **History.** Collection started on 2026-10-01, so there are only weeks of data. Anything about how skew or the VIX gap behaves over time needs more history.
 - **American exercise.** Single-stock options are American but are inverted with Black-76. Using only out-of-the-money options keeps the early-exercise premium small, not zero.
 - **SVI's shape.** SVI cannot bend sharply enough at the money for TSLA, so the fit sits about 1 vol point below the market there. The earnings decomposition uses market ATM variance for that reason.
 - **Inputs.** Treasury par yields stand in for zero rates, and Yahoo's earnings dates can be estimates with no before-open or after-close timing.
