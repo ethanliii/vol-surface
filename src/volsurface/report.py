@@ -294,7 +294,7 @@ def site_html(date_str, names, surf_figs, smile_figs, tables, spx) -> str:
 <p class="lead">SPX index options (European) and four single stocks into earnings, cleaned,
 inverted to implied vol with a custom solver and fitted with arbitrage-free SVI.
 Data: Yahoo Finance closing quotes, {date_str}. Source code and methodology:
-<a href="https://github.com/hacks1234646/vol-surface">GitHub</a>.</p>
+<a href="https://github.com/ethanliii/vol-surface">GitHub</a>.</p>
 <div class="tiles">
  <div class="tile"><div class="label">SPX model-free 30d vol (fitted SVI)</div>
   <div class="value">{_f(h["model_free_30d"])}</div><div class="sub">VIX close {h["vix"]:.2f}</div></div>
