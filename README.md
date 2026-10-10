@@ -2,7 +2,7 @@
 
 Turns free, noisy end-of-day option quotes into an implied volatility surface you could actually quote and risk-manage off, then uses it to price the earnings move in four stocks reporting in October 2026.
 
-Live site with the 3D surface and a smile explorer for every expiry: **https://hacks1234646.github.io/vol-surface/**
+Live site with the 3D surface and a smile explorer for every expiry: **https://ethanliii.github.io/vol-surface/**
 
 ![SPX implied volatility surface](docs/img/surface_SPX.png)
 
@@ -19,7 +19,7 @@ This project builds the whole chain from scratch: cleaning, forwards from put-ca
 
 ## Results (2026-10-01 close)
 
-> The tables below are from the first snapshot. A GitHub Actions job has added one snapshot after every close since 2026-10-01 and redeploys the site, so the [live site](https://hacks1234646.github.io/vol-surface/) shows the latest close and the time-series charts fill in as history builds up.
+> The tables below are from the first snapshot. A GitHub Actions job has added one snapshot after every close since 2026-10-01 and redeploys the site, so the [live site](https://ethanliii.github.io/vol-surface/) shows the latest close and the time-series charts fill in as history builds up.
 
 ### 1. A clean SPX surface
 
@@ -90,7 +90,7 @@ Unconstrained SVI fits sit close to the quotes, but they put arbitrage in the ex
 
 ![Durrleman's condition for raw vs arbitrage-free SVI](docs/img/arbitrage_SPX.png)
 
-The full tables for all five underlyings are on the [site](https://hacks1234646.github.io/vol-surface/) and in [`docs/results.json`](docs/results.json).
+The full tables for all five underlyings are on the [site](https://ethanliii.github.io/vol-surface/) and in [`docs/results.json`](docs/results.json).
 
 ## How it works
 
@@ -106,7 +106,7 @@ The full tables for all five underlyings are on the [site](https://hacks1234646.
 ## Run it
 
 ```bash
-git clone https://github.com/hacks1234646/vol-surface && cd vol-surface
+git clone https://github.com/ethanliii/vol-surface && cd vol-surface
 make install   # venv, dependencies and the package (Python 3.11+)
 make build     # fit and analyse every snapshot in data/, write figures and the site to docs/
 make collect   # fetch today's snapshot (run after the close)
