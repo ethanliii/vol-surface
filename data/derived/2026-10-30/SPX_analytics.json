@@ -1,0 +1,50 @@
+{
+ "pipeline_version": "2",
+ "analytics": {
+  "name": "SPX",
+  "trade_date": "2026-10-30",
+  "spot": 7580.06982421875,
+  "european": true,
+  "atm": {
+   "365": 0.17471667168938076
+  },
+  "n_expiries_fitted": 2,
+  "n_quotes_used": 26,
+  "median_rmse_vol_free": 0.0055160996325917065,
+  "median_rmse_vol_raw": 0.0013477018330422725,
+  "median_rmse_vol_ssvi": 0.013915725457489939,
+  "ssvi": {
+   "rho": -0.35606497061497555,
+   "eta": 1.1454011805657203,
+   "gamma": 0.5
+  },
+  "model_free_vol_30d": NaN,
+  "vix_close": 19.420000076293945
+ },
+ "cleaning": {
+  "zero_bid": 9415,
+  "no_forward": 408,
+  "stale_last_trade": 364,
+  "in_the_money": 73,
+  "used": 26,
+  "stale_arbitrage": 23,
+  "wide_market": 5,
+  "crossed_or_locked": 4,
+  "stale_outlier": 1
+ },
+ "ssvi": {
+  "T": [
+   0.6657534246575343,
+   1.6293949771689498
+  ],
+  "theta": [
+   0.017398358132081584,
+   0.06802954104941407
+  ]
+ },
+ "k_grid": [
+  -2.3474225919085256,
+  2.3474225919085256,
+  301
+ ]
+}
