@@ -1,0 +1,57 @@
+{
+  "trade_date": "2026-11-20",
+  "fetched_at_utc": "2026-11-21T03:12:05+00:00",
+  "source": "yahoo finance via yfinance 1.8.0",
+  "underlyings": {
+    "SPX": {
+      "close": 6910.39013671875,
+      "close_date": "2026-11-20",
+      "n_quotes": 21960,
+      "n_expiries": 50
+    },
+    "JPM": {
+      "close": 310.5299987792969,
+      "close_date": "2026-11-20",
+      "earnings_dates": [
+        "2027-01-14"
+      ],
+      "n_quotes": 959,
+      "n_expiries": 11
+    },
+    "NFLX": {
+      "close": 56.72999954223633,
+      "close_date": "2026-11-20",
+      "earnings_dates": [
+        "2027-01-19"
+      ],
+      "n_quotes": 2587,
+      "n_expiries": 11
+    },
+    "TSLA": {
+      "close": 345.82000732421875,
+      "close_date": "2026-11-20",
+      "earnings_dates": [
+        "2027-01-27"
+      ],
+      "n_quotes": 3091,
+      "n_expiries": 16
+    },
+    "META": {
+      "close": 560.8400268554688,
+      "close_date": "2026-11-20",
+      "earnings_dates": [
+        "2027-01-27"
+      ],
+      "n_quotes": 3884,
+      "n_expiries": 17
+    }
+  },
+  "vix": {
+    "close": 35.88999938964844,
+    "date": "2026-11-20"
+  },
+  "rates": {
+    "source": "treasury",
+    "asof": "2026-11-20"
+  }
+}
